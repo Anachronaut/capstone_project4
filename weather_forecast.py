@@ -2,12 +2,25 @@ import requests
 import os
 from datetime import datetime
 
+
 key = os.environ.get('WEATHER_KEY')
 
-city = input('Enter city name: ')
-country = input('Enter country code: ')
 
-query = {'q': city+','+country, 'units': 'imperial', 'appid': key}
+def get_city():
+    city = input('Enter city name: ')
+
+
+def get_country():
+    country = input('Enter country code: ')
+
+
+def get_input(question):
+    return input(question)
+
+
+
+
+query = {'q': get_city() + ',' + get_country(), 'units': 'imperial', 'appid': key}
 
 url = 'https://api.openweathermap.org/data/2.5/forecast'
 data = requests.get(url, params=query).json()
