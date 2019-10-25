@@ -1,9 +1,12 @@
 import spotipy
 import spotify as spotify
 import weather_forecast as weather
+import pixabay as pixabay
 
 
 def main():
+
+    banner()
 
     # Weather
     city = weather.get_input('Enter city name: ')
@@ -16,10 +19,13 @@ def main():
     token = spotify.erase_cache(username, scope)
     spotifyObject = spotify.spotipy.Spotify(auth=token)
     deviceID = spotify.get_devices(spotifyObject)
+    spotify.get_weather_song(weatherDescription, spotifyObject, deviceID)
 
     # Pixabay
+    image = pixabay.get_image(weatherDescription)
+    spotify.display_image(image)
 
-    print(weatherDescription)
+
     # Main menu loop
     while True:
         main_menu()
@@ -34,13 +40,18 @@ def main():
 
 
 def main_menu():
-    # Main Menu
+    # Continue
+    print()
+    print('0 - Get another song')
+    print('1 - exit')
+    print()
+    pass
+
+
+def banner():
     print()
     print('>>> Welcome!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     print('>>> MAKE SURE YOU HAVE SPOTIFY RUNNING FIRST!')
-    print()
-    print('0 - Get the weather')
-    print('1 - exit')
     print()
     pass
 

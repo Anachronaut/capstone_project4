@@ -66,5 +66,9 @@ def get_weather_song(query, spotify, deviceID):
     trackURIs.append(track['uri'])
     spotify.start_playback(device_id=deviceID, uris=trackURIs)    # Plays track on appropriate device
 
-    # Displays album art in browser
-    webbrowser.open(track['album']['images'][0]['url'])           # TODO: Replace album art with PixaBay API request
+
+
+def display_image(imageURL):
+    # Displays Pixabay art in browser
+    webbrowser.open(imageURL)
+    pass
