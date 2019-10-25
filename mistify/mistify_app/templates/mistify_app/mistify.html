@@ -1,0 +1,13 @@
+<h2>Mistify</h2>
+
+<form method="POST" action="{% url 'place_list' %}">
+  {% csrf_token %}
+  {{ new_place_form }}
+  <button type="submit">Submit</button>
+</form><br>
+
+<h2><u>Weather</u></h2>
+<b>Description:</b><br>
+<b>Temperature:</b><br>
+<br>
+<iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1E382OtzoPFkiL" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
