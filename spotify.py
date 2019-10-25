@@ -12,7 +12,7 @@ def get_username():
 
 
 def get_scope():
-    return ('user-read-private ' +                 # Accesses user subscription details
+    return ('user-read-private ' +                  # Accesses user subscription details
             'user-read-playback-state ' +           # Reads currently playing track
             'user-modify-playback-state')           # Controls playback
 
@@ -24,12 +24,6 @@ def erase_cache(user, scope):
         return util.prompt_for_user_token(user, scope)
     except (AttributeError, JSONDecodeError):
         os.remove(f'.cache-{user}')
-        return util.prompt_for_user_token(user, scope)
-
-
-
-def get_weather(question):
-    return input(question)  # Replace the weather description from the weather API
 
 
 
@@ -43,7 +37,7 @@ def get_devices(spotify):
 def get_weather_song(query, spotify, deviceID):
     # Basically this searches for tracks that contain whatever the weather description is in it.
     # It returns the first result (change limit parameter to return more results)
-    searchResults = spotify.search(q=query, limit=1, type='track')          # TODO: Change to playlist
+    searchResults = spotify.search(q=query, limit=1, type='track')
 
     # Get track details for searchResult
     track = searchResults['tracks']['items'][0]
