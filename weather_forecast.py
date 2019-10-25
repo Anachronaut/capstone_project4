@@ -17,12 +17,3 @@ def make_api_call(city, country):
     forecast = data['list']
     weather = forecast[0]
     return weather['weather'][0]['description']
-
-
-# timestamp = weather['dt']
-# date = datetime.fromtimestamp(timestamp) #Leaving time as UTC as you can enter global cities
-# temp = weather['main']['temp']
-# desc = weather['weather'][0]['description']
-# humidity = weather['main']['humidity']
-# cloudy = weather['clouds']['all']
-# print(f'at {date}: Weather is: {desc}, Temperature is: {temp}°F, Cloudiness at: {cloudy}, Humidity at: {humidity}')

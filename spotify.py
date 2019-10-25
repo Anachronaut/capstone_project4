@@ -48,20 +48,6 @@ def get_weather_song(query, spotify, deviceID):
     # Get track details for searchResult
     track = searchResults['tracks']['items'][0]
 
-    # trackID = track['id']                               # Track attributes
-    # trackKey = track['key']                             #
-    # trackMode = track['mode']                           #
-    # trackTimeSignature = track['time_signature']        #
-    # trackAcoustic = track['acousticness']               #
-    # trackInstrumentalness = track['instrumentalness']   #
-    # trackLiveness = track['liveness']                   #
-    # trackLoudness = track['loudness']                   #
-    # trackSpeechiness = track['speechiness']             #
-    # trackTempo = track['tempo']                         #
-    # trackValence = track['valence']                     #
-    # trackDance = track['danceability']                  #
-    # trackEnergy = track['energy']                       #
-
     trackURIs = []
     trackURIs.append(track['uri'])
     spotify.start_playback(device_id=deviceID, uris=trackURIs)    # Plays track on appropriate device
