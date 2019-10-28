@@ -8,6 +8,6 @@ import spotify
 import pixabay
 import database as db
 
-class TestProgram(TestCase):
+# class TestProgram(TestCase):
 
     # TODO: add tests

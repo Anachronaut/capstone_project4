@@ -2,7 +2,9 @@ import os
 import spotipy
 import webbrowser
 import spotipy.util as util
+import json
 from json.decoder import JSONDecodeError
+import random
 
 
 def get_username():
@@ -37,14 +39,18 @@ def get_devices(spotify):
 def get_weather_song(query, spotify, deviceID):
     # Basically this searches for tracks that contain whatever the weather description is in it.
     # It returns the first result (change limit parameter to return more results)
-    searchResults = spotify.search(q=query, limit=1, type='track')
+    searchResults = spotify.search(q=query, limit=50, type='track')
 
     # Get track details for searchResult
-    track = searchResults['tracks']['items'][0]
+    track = searchResults['tracks']['items']
 
     trackURIs = []
-    trackURIs.append(track['uri'])
-    spotify.start_playback(device_id=deviceID, uris=trackURIs)    # Plays track on appropriate device
+    for t in track:
+        trackURIs.append(t['uri'])
+    
+    # Plays track on appropriate device
+    spotify.start_playback(device_id=deviceID, uris=trackURIs, 
+                            offset= {"position": random.randint(0, len(track))})
 
 
 
