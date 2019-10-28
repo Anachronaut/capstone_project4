@@ -1,0 +1,14 @@
+{% load static %}
+{% block content %}
+
+{{ place }}
+
+<form method="POST" action="{% url 'delete_result' %}">
+  {% csrf_token %}
+  <input type="hidden" name="pk" value="{{ place.pk }}">
+  <button type=submit class="delete">Delete</button>
+</form>
+
+<script src="{% static 'js/confirm_delete.js' %}"></script>
+
+{% endblock %}

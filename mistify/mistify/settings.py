@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mistify_app'
+    'mistify_app',
+    'spotipy',
 ]
 
 MIDDLEWARE = [
