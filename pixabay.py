@@ -15,11 +15,10 @@ def get_image(weather):
     data = requests.get(url, params=query).json()
     hitsList = data['hits']
     image = random.choice(hitsList)
-    return image['largeImageURL']
+    return image
 
 
 
-def display_image(imageURL):
+def display_image(image):
     # Displays image in browser
-    webbrowser.open(imageURL)
-    pass
+    webbrowser.open(image.url)

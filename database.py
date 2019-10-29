@@ -7,17 +7,20 @@ db = 'bookmark_db.sqlite'
 def create_db():
     conn = sqlite3.connect(db)
 
-    conn.execute('CREATE TABLE IF NOT EXISTS bookmarks (tracks TEXT, images TEXT)')
+    conn.execute('CREATE TABLE IF NOT EXISTS bookmarks (' +
+                'primaryKey INTEGER PRIMARY KEY, ' +
+                'trackID TEXT, trackArtist TEXT, trackName TEXT, trackURI TEXT, ' +
+                'imageID INTEGER, imageURL TEXT)')
     conn.commit()
     conn.close()
 
 
 
-def add_urls(track, image):
-    add_urls_sql = 'INSERT INTO bookmarks (tracks, images) VALUES (?, ?)'
+def add_track(track, image):
+    add_track_sql = 'INSERT INTO bookmarks (trackID, trackArtist, trackName, trackURI, imageID, imageURL) VALUES (?, ?, ?, ?, ?, ?)'
 
     with sqlite3.connect(db) as conn:
-        added = conn.execute(add_urls_sql, (track, image))
+        added = conn.execute(add_track_sql, (track, image))
         added_count = added.rowcount
     conn.close()
 
@@ -28,11 +31,11 @@ def add_urls(track, image):
 
 
 
-def show_urls():
+def display_all():
     conn = sqlite3.connect(db)
-    show_urls_sql = 'SELECT * FROM bookmarks'
+    display_all_tracks_sql = 'SELECT * FROM bookmarks'
 
-    cur = conn.execute(show_urls_sql)
+    cur = conn.execute(display_all_tracks_sql)
     all_urls = cur.fetchall()
     allList = []
     for item in all_urls:
@@ -40,3 +43,15 @@ def show_urls():
     conn.close()
 
     return allList
+
+
+
+def search_track(pk):
+    conn = sqlite3.connect(db)
+    search_track_url = 'SELECT * FROM bookmarks WHERE primaryKey = ?'
+
+    cur = conn.execute(search_track_url, (pk, ))
+    item = cur.fetchone()
+
+    conn.close()
+    return item

@@ -35,18 +35,17 @@ def get_devices(spotify):
 
 
 
-def get_weather_song(query, spotify, deviceID):
-    # Searches for songs that contain the weather description
-    # and returns up to 50 results
+def get_track(query, spotify):
+    # Searches Spotify for up to 50 tracks that includes the weather description
+    # and return one track at random
     searchResults = spotify.search(q=query, limit=50, type='track')
+    return searchResults['tracks']['items'][random.randint(0, len(searchResults)+1)]
 
-    # Get track details for searchResult
-    track = searchResults['tracks']['items']
 
+
+def play_track(track, spotify, deviceID):
     trackURIs = []
-    for t in track:
-        trackURIs.append(t['uri'])
+    trackURIs.append(track.uri)
     
     # Plays track on appropriate device
-    spotify.start_playback(device_id=deviceID, uris=trackURIs, 
-                            offset= {"position": random.randint(0, len(track))})    # Randomizes the track that plays
+    spotify.start_playback(device_id=deviceID, uris=trackURIs)
