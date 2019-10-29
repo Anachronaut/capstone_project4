@@ -16,4 +16,9 @@ def make_api_call(city, country):
     data = requests.get(url, params=query).json()
     forecast = data['list']
     weather = forecast[0]
-    return weather['weather'][0]['description']
+    description = weather['weather'][0]['description']
+    temp = weather['main']['temp']
+    cloudy = weather['clouds']['all']
+    humidity = weather['main']['humidity']
+
+    return description, temp, cloudy, humidity

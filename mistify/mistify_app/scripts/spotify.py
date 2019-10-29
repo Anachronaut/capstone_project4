@@ -6,10 +6,14 @@ import spotipy.util as util
 from json.decoder import JSONDecodeError
 
 
+
+
+
+"""
 def get_username():
     # My user id: 1270957563
     return input("What is your Spotify ID?: ")
-
+"""
 
 
 def get_scope():
@@ -38,19 +42,20 @@ def get_devices(spotify):
 def get_weather_song(query, spotify, deviceID):
     # Basically this searches for tracks that contain whatever the weather description is in it.
     # It returns the first result (change limit parameter to return more results)
-    searchResults = spotify.search(q=query, limit=1, type='track')
-    print(searchResults['tracks']['items'])
+    searchResults = spotify.search(q=query, limit=50, type='playlist')
+    #print(searchResults['tracks']['items'])
 
-    # Get track details for searchResult
-    track = random.choice(searchResults['tracks']['items'])
+    # Get track details for searchResult; Maybe change this to the recommendations function, create a new playlist for the user?
+    playlist = random.choice(searchResults['playlists']['items'])
 
-    trackURIs = []
-    trackURIs.append(track['uri'])
-    spotify.start_playback(device_id=deviceID, uris=trackURIs)    # Plays track on appropriate device
+    playlistURIs = []
+    playlistURIs.append(playlist['uri'])
+    #spotify.start_playback(device_id=deviceID, uris=trackURIs)    # Plays track on appropriate device
+    return playlistURIs[0]
 
 
 
-def display_image(imageURL):
+#def display_image(imageURL):
     # Displays Pixabay art in browser
-    webbrowser.open(imageURL)
-    pass
+    #return imageURL
+    #pass

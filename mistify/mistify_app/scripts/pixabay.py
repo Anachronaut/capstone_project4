@@ -13,4 +13,5 @@ def get_image(weather):
     data = requests.get(url, params=query).json()
     hitsList = data['hits']
     image = random.choice(hitsList)
+    #print(image['largeImageURL'])
     return image['largeImageURL']

@@ -1,7 +1,25 @@
 from django import forms
 from .models import Place
+from . import scripts
+from .scripts import main
 
 class NewPlaceForm(forms.ModelForm):
     class Meta:
         model = Place
-        fields = ('city', 'country')
+        fields = ('city', 'country', 'spot_un', 'image', 'playlist', 'w_desc', 'temp', 'cloudy', 'humid')
+        widgets = {'image': forms.HiddenInput(), 'playlist': forms.HiddenInput(), 'w_desc': forms.HiddenInput(), 'temp': forms.HiddenInput(),
+        'cloudy': forms.HiddenInput(), 'humid': forms.HiddenInput()}
+
+    def clean(self):
+        cleaned_data = super(NewPlaceForm, self).clean()
+        city = cleaned_data['city']
+        country = cleaned_data['country']
+        username = cleaned_data['spot_un']
+        cleaned_data['image'], cleaned_data['playlist'], cleaned_data['w_desc'], cleaned_data['temp'], cleaned_data['cloudy'], cleaned_data['humid'] = main.main(city,country,username)
+        del self._errors['image']
+        del self._errors['playlist']
+        del self._errors['w_desc']
+        del self._errors['temp']
+        del self._errors['cloudy']
+        del self._errors['humid']
+        return cleaned_data

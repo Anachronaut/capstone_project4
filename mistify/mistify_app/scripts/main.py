@@ -1,30 +1,33 @@
 import spotipy
+import random
 from mistify_app.scripts import spotify as spotify
 from mistify_app.scripts import weather_forecast as weather
 from mistify_app.scripts import pixabay as pixabay
+from mistify_app.scripts import query_array as q_arr
 
 
-def main(city,country):
+def main(city,country,username):
 
-    banner()
+    #banner()
 
     # Weather
-    weatherDescription = weather.make_api_call(city, country)
+    weatherDescription, weatherTemp, weatherCloudy, weatherHumid = weather.make_api_call(city, country)
 
     # Spotify
-    username = spotify.get_username()
     scope = spotify.get_scope()
     token = spotify.erase_cache(username, scope)
     spotifyObject = spotify.spotipy.Spotify(auth=token)
     deviceID = spotify.get_devices(spotifyObject)
-    spotify.get_weather_song(weatherDescription, spotifyObject, deviceID)
+    playlist = spotify.get_weather_song(weatherDescription, spotifyObject, deviceID)
+    playlist = playlist.strip('spotify:playlist:')
 
     # Pixabay
     image = pixabay.get_image(weatherDescription)
-    spotify.display_image(image)
+    return image, playlist, weatherDescription, weatherTemp, weatherCloudy, weatherHumid
 
 
     # Main menu loop
+    """
     while True:
         main_menu()
         choice = input('Your choice: ')
@@ -34,7 +37,6 @@ def main(city,country):
             spotify.get_weather_song(searchQuery, spotifyObject, deviceID)
         elif choice == '1':
             break
-
 
 
 def main_menu():
@@ -52,3 +54,4 @@ def banner():
     print('>>> MAKE SURE YOU HAVE SPOTIFY RUNNING FIRST!')
     print()
     pass
+"""

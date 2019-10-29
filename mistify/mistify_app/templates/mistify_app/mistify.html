@@ -1,21 +1,38 @@
-<h2>Mistify</h2>
+{% load static %}
+<head>
+  <title>Mistify - A Playlist for Every Mood</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}"
+</head>
 
-<form method="POST" action="{% url 'place_list' %}">
-  {% csrf_token %}
-  {{ new_place_form }}
-  <button type="submit">Submit</button>
-</form><br>
-{% for place in places %}
+<body>
+  <div class="background" style="background-image: url('{{ bg_url }}')">
+    <h2>Mistify</h2>
 
-<div>
-  {{ place }}
-</div>
+    <form method="POST" action="{% url 'place_list' %}">
+      {% csrf_token %}
+      <table border="1">
+        {{ new_place_form }}
+        <h1><u>Weather</u></h1><br>
+        <b>Description:</b> {{ w_desc }}<br><br>
+        <b>Temperature: {{ temp }}°F</b><br>
+        <br>
+      </table>
+      <button type="submit">Submit</button>
+    </form><br>
 
-{% endfor %}
-<br>
+    {% for place in places %}
 
-<h2><u>Weather</u></h2>
-<b>Description:</b><br>
-<b>Temperature:</b><br>
-<br>
-<iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1E382OtzoPFkiL" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <div class="places">
+      <table border="1">
+        {{ place }}
+      </table>
+    </div>
+
+    {% endfor %}
+
+    <br>
+    <div class="spotify">
+      <iframe src="https://open.spotify.com/embed/playlist/{{ playlist_uri }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+  </div>
+</body>
