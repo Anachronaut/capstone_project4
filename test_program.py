@@ -8,6 +8,37 @@ import spotify
 import pixabay
 import database as db
 
-# class TestProgram(TestCase):
+import os
+import random
+imgkey = os.environ.get('IMAGE_KEY')
+weatherkey = os.environ.get('WEATHER_KEY')
 
-    # TODO: add tests
+class TestProgram(TestCase):
+
+    # Test Pixabay API
+    @patch('pixabay.get_image')
+    def test_get_image(self, mock_weather):
+        mock_weather = snow
+        example_api_response = {'q': mock_weather, 'key': imgkey}
+        
+        hitsList = data[example_api_response]
+        image = random.choice(hitsList)
+        assert (image != null)
+
+
+
+
+    
+    # Test Weather API
+    @patch('weather_forecast.make_api_call')
+    def test_api_call(self, mock_city, mock_country):
+        mock_city = minneapolis
+        mock_country = us
+        example_api_response = query = {'q': mock_city + ',' + mock_country, 'units': 'imperial', 'appid': weatherkey}
+        
+        forecast = data[ example_api_response ]
+        weather = forecast[0]
+
+        assert (weather != null)
+
+    
