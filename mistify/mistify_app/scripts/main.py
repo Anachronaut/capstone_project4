@@ -3,7 +3,6 @@ import random
 from mistify_app.scripts import spotify as spotify
 from mistify_app.scripts import weather_forecast as weather
 from mistify_app.scripts import pixabay as pixabay
-from mistify_app.scripts import query_array as q_arr
 
 
 def main(city,country,username):
@@ -18,8 +17,11 @@ def main(city,country,username):
     token = spotify.erase_cache(username, scope)
     spotifyObject = spotify.spotipy.Spotify(auth=token)
     deviceID = spotify.get_devices(spotifyObject)
-    playlist = spotify.get_weather_song(weatherDescription, spotifyObject, deviceID)
-    playlist = playlist.strip('spotify:playlist:')
+    if weatherDescription != 'Error! Please check city name and country code.':
+        playlist = spotify.get_weather_song(weatherDescription, spotifyObject, deviceID)
+        playlist = playlist.strip('spotify:playlist:')
+    else:
+        return
 
     # Pixabay
     image = pixabay.get_image(weatherDescription)

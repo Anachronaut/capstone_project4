@@ -43,7 +43,6 @@ def get_weather_song(query, spotify, deviceID):
     # Basically this searches for tracks that contain whatever the weather description is in it.
     # It returns the first result (change limit parameter to return more results)
     searchResults = spotify.search(q=query, limit=50, type='playlist')
-    #print(searchResults['tracks']['items'])
 
     # Get track details for searchResult; Maybe change this to the recommendations function, create a new playlist for the user?
     playlist = random.choice(searchResults['playlists']['items'])
