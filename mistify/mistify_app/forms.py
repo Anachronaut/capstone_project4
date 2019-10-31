@@ -10,7 +10,7 @@ class NewResultForm(forms.ModelForm):
         widgets = {'image': forms.HiddenInput(), 'playlist': forms.HiddenInput(), 'w_desc': forms.HiddenInput(), 'temp': forms.HiddenInput(),
         'cloudy': forms.HiddenInput(), 'humid': forms.HiddenInput(), 'datetime': forms.HiddenInput()}
 
-    def clean(self):
+    def clean(self): #cleans hidden field form data before being passed to view
         try:
             cleaned_data = super(NewResultForm, self).clean()
             city = cleaned_data['city']
