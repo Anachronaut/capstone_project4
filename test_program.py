@@ -25,10 +25,6 @@ class TestProgram(TestCase):
         image = random.choice(hitsList)
         assert (image != null)
 
-
-
-
-    
     # Test Weather API
     @patch('weather_forecast.make_api_call')
     def test_api_call(self, mock_city, mock_country):
@@ -40,5 +36,19 @@ class TestProgram(TestCase):
         weather = forecast[0]
 
         assert (weather != null)
+
+    
+    # Test Spotify API
+
+    # Test Weather to Spotify
+
+    # Test Weather to Pixabay
+
+
+
+    # Data base tests
+
+
+    
 
     
