@@ -1,0 +1,52 @@
+{% load static %}
+<head>
+  <title>Mistify - A Playlist for Every Atmosphere</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}"
+</head>
+<div class="background" style="background-image: url('{{ bg_url }}')">
+  <body>
+
+
+
+    {% for result in results %}
+    <div class="results-list">
+          <span id="result-name-{{ result.pk }}" class="result-name">
+            <a href="{% url 'stored_result' result_pk=result.pk %}">{{ result }}</a><br>
+          </span>
+    </div>
+    {% endfor %}
+
+
+    <div class="content">
+      <h2>MISTIFY</h2>
+      <i>A Playlist for Every Atmosphere</i>
+      <br>
+      <br>
+      <br>
+      <div class="weather">
+        <b>Description:</b> {{ w_desc }}<br><br>
+        <b>Temperature: {{ temp }}°F</b><br>
+        <b>Cloudiness: {{ cloudy }}%</b><br>
+        <b>Humidity: {{ humidity }}%<b><br>
+      </div>
+      <br>
+      <br>
+        <form method="POST" action="{% url 'home_form' %}">
+          {% csrf_token %}
+            <div class='result-form'>
+              <table>
+              {{ new_result_form.as_table }}
+              </table>
+            </div>
+            <br>
+        <button type="submit">Submit</button>
+      </form><br>
+    </div>
+
+
+    <div class="spotify">
+      <iframe src="https://open.spotify.com/embed/playlist/{{ playlist_uri }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+
+  </body>
+</div>

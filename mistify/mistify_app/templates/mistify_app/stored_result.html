@@ -1,0 +1,46 @@
+{% load static %}
+<head>
+  <title>Mistify - A Playlist for Every Mood</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}"
+</head>
+<div class="background" style="background-image: url('{{ bg_url }}')">
+  {% block content %}
+    <body>
+
+
+        <div class="spotify">
+          <iframe src="https://open.spotify.com/embed/playlist/{{ playlist_uri }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+    <div class="content">
+
+
+      <div class="weather">
+        <a href="{% url 'home_form' %}">Home</a><br><br>
+        {{ result }}
+        <br>
+        <br class="multibreak">
+        <table border="1">
+          <b>Description:</b> {{ w_desc }}<br><br>
+          <b>Temperature: {{ temp }}°F</b><br>
+          <b>Cloudiness: {{ cloudy }}%</b><br>
+          <b>Humidity: {{ humidity }}%<b><br>
+        </table>
+      </div>
+      <br>
+      <br class="multibreak">
+
+      <form method="POST" action="{% url 'delete_result' %}">
+        {% csrf_token %}
+        <input type="hidden" name="pk" value="{{ result.pk }}">
+        <button type=submit class="delete">Delete</button>
+      </form>
+      <br>
+
+
+
+
+      <script src="{% static 'js/confirm_delete.js' %}"></script>
+    </div>
+    {% endblock %}
+  </body>
+</div>
